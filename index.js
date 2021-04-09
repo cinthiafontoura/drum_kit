@@ -1,6 +1,5 @@
 // Detecting button press
 
-
 for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
 
   document.querySelectorAll(".drum")[i].addEventListener("click", function() {
@@ -8,6 +7,8 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
     var buttonInnerHTML = this.innerHTML;
 
     makeSound(buttonInnerHTML);
+    
+    addButtonAnimation(buttonInnerHTML);
 
   });
 }
@@ -16,7 +17,9 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
 
 document.addEventListener("keypress", function(event) {
 
-    makeSound (event.key);
+    makeSound(event.key);
+  
+    addButtonAnimation(event.key);
   }
 );
 
@@ -61,4 +64,15 @@ function makeSound (key){
 
     default: console.log(buttonInnerHTML);
   }
+}
+
+function addButtonAnimation(currentKey) {
+
+  var activeButton = document.querySelector("." + currentKey);
+
+  activeButton.classList.add("pressed");
+
+  setTimeout(function() {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
